@@ -52,6 +52,34 @@
 # Getting started
 
 ## Installation
-```
+```bash
 npm i --save spotify-web-playback-ts
 ```
+
+## Usage
+```js
+async function load() {
+  const accessToken = '...'
+  // Init playback SDK by adding async script to document and await load
+  const player = await SpotifyPlayer.init(document, 'Browser Player!', 0.5, cb => cb(accessToken))
+  
+  // Connect the player
+  await player.connect()
+
+  // Listen to player state
+  player.onPlayerStateChanged(state => console.log('State changed', state)
+
+  // Toggle playback
+  await player.togglePlay()
+}
+
+load()
+```
+
+## Documentation
+
+1. Read the [Spotify Playback SDK Quickstart](https://developer.spotify.com/documentation/web-playback-sdk/quick-start/)
+
+2. Read the [Spotify Playback SDK API reference](https://developer.spotify.com/documentation/web-playback-sdk/reference/#api-spotify-player)
+
+3. See [SpotifyPlayer type insterface](./src/index.ts) for usage
