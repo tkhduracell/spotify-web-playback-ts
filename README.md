@@ -67,13 +67,26 @@ async function load() {
   await player.connect()
 
   // Listen to player state
-  player.onPlayerStateChanged(state => console.log('State changed', state)
+  player.onPlayerStateChanged(state => console.log('State changed', state))
+
+  // Listen to errors (initialization_error, authentication_error, account_error, playback_error)
+  player.on('authentication_error', ({ message }) => console.error(message))
 
   // Toggle playback
   await player.togglePlay()
+
+  // Seek to one minute into the track
+  await player.seek(60 * 1000)
 }
 
 load()
+```
+
+### Options
+
+```js
+// Enable the Media Session API (metadata and action handlers)
+SpotifyPlayer.init(document, 'Browser Player!', 0.5, cb => cb(accessToken), { enableMediaSession: true })
 ```
 
 ## Documentation
